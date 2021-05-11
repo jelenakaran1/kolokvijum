@@ -1,0 +1,23 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+unsigned long t0 = 0;
+
+ISR(TIMER0_COMPA_vect)
+{
+	t0++;
+}
+
+
+int main (void)
+{
+	TCCR0A = 0x02;
+	TCCR0B = 0x03;
+	OCR0A = 249;
+	TIMSK0 = 0x02;
+
+	sei();
+
+	DDRB |= 1 << 5; //izlaz za diodu
+	PORTB |= 1 << 5; //led on
+}

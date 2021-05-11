@@ -1,0 +1,16 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+unsigned long t0 = 0;
+
+ISR(TIMER0_COMPA_vect)
+{
+	t0++;
+}
+
+
+int main (void)
+{
+	DDRB |= 1 << 5;
+	PORTB |= 1 << 5;
+}
